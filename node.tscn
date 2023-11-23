@@ -1,0 +1,137 @@
+[gd_scene load_steps=3 format=3 uid="uid://dfnjsyho6imap"]
+
+[ext_resource type="Script" path="res://Controller.gd" id="1_epeay"]
+[ext_resource type="Script" path="res://Canvas.gd" id="2_a0aw6"]
+
+[node name="Node" type="Node" node_paths=PackedStringArray("canvas", "color_picker_v1", "color_picker_v2", "color_picker_v3", "color_picker_aresta", "btn_pintar", "btn_remover")]
+script = ExtResource("1_epeay")
+canvas = NodePath("CanvasLayer/VBoxContainer/Control")
+color_picker_v1 = NodePath("CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer/TrianguloSelecionado/HBoxContainer/Vertice1")
+color_picker_v2 = NodePath("CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer/TrianguloSelecionado/HBoxContainer/Vertice2")
+color_picker_v3 = NodePath("CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer/TrianguloSelecionado/HBoxContainer/Vertice3")
+color_picker_aresta = NodePath("CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer/TrianguloSelecionado/HBoxContainer/Arestas")
+btn_pintar = NodePath("CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer/TrianguloSelecionado/HBoxContainer/Pintar")
+btn_remover = NodePath("CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer/TrianguloSelecionado/HBoxContainer/Remover")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer"]
+offset_right = 1920.0
+offset_bottom = 1080.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="PanelContainer" type="PanelContainer" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/PanelContainer"]
+layout_mode = 2
+
+[node name="SwitchEstado" type="MarginContainer" parent="CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer/SwitchEstado"]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer/SwitchEstado/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+text = "Alternar Desenhar/Selecionar"
+horizontal_alignment = 1
+
+[node name="SwitchEstado" type="CheckButton" parent="CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer/SwitchEstado/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="TrianguloSelecionado" type="MarginContainer" parent="CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 2.0
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_right = 24
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer/TrianguloSelecionado"]
+layout_mode = 2
+
+[node name="Vertice1" type="ColorPickerButton" parent="CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer/TrianguloSelecionado/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+disabled = true
+text = "
+"
+
+[node name="Vertice2" type="ColorPickerButton" parent="CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer/TrianguloSelecionado/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+disabled = true
+text = "
+"
+
+[node name="Vertice3" type="ColorPickerButton" parent="CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer/TrianguloSelecionado/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+disabled = true
+text = "
+"
+
+[node name="Arestas" type="ColorPickerButton" parent="CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer/TrianguloSelecionado/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 4
+disabled = true
+text = "
+"
+
+[node name="Pintar" type="Button" parent="CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer/TrianguloSelecionado/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+disabled = true
+text = "Pintar"
+
+[node name="Remover" type="Button" parent="CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer/TrianguloSelecionado/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+disabled = true
+text = "Remover"
+
+[node name="SairPrograma" type="MarginContainer" parent="CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 24
+theme_override_constants/margin_right = 24
+theme_override_constants/margin_bottom = 0
+
+[node name="Sair" type="Button" parent="CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer/SairPrograma"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Sair do Programa"
+
+[node name="Control" type="Control" parent="CanvasLayer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+size_flags_stretch_ratio = 4.0
+script = ExtResource("2_a0aw6")
+limite = 215
+
+[connection signal="toggled" from="CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer/SwitchEstado/HBoxContainer/SwitchEstado" to="." method="_on_switch_estado_toggled"]
+[connection signal="color_changed" from="CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer/TrianguloSelecionado/HBoxContainer/Vertice1" to="." method="_on_vertice_1_color_changed"]
+[connection signal="color_changed" from="CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer/TrianguloSelecionado/HBoxContainer/Vertice2" to="." method="_on_vertice_2_color_changed"]
+[connection signal="color_changed" from="CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer/TrianguloSelecionado/HBoxContainer/Vertice3" to="." method="_on_vertice_3_color_changed"]
+[connection signal="color_changed" from="CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer/TrianguloSelecionado/HBoxContainer/Arestas" to="." method="_on_arestas_color_changed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer/TrianguloSelecionado/HBoxContainer/Pintar" to="." method="_on_pintar_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer/TrianguloSelecionado/HBoxContainer/Remover" to="." method="_on_remover_pressed"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/PanelContainer/HBoxContainer/SairPrograma/Sair" to="." method="_on_sair_pressed"]
