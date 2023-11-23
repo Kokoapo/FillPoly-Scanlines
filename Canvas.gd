@@ -25,6 +25,7 @@ class Triangulo:
 @export var limite: int; # limite inferior das coordenadas do canvas
 var lista_triangulos: Array; # Guarda todos os triângulos
 var pontos_novo_triangulo: Array; # Guarda pontos do triângulo sendo criado
+var triangulo_selecionado: int = -1;
 
 # Ações do canvas no estado desenhar: 
 #	- Adicionar novo ponto à lista de pontos
@@ -45,6 +46,8 @@ func action_desenhar(pos: Vector2):
 func action_selecionar(pos: Vector2) -> int:
 	for i in range(lista_triangulos.size()):
 		if is_dentro_triangulo(pos, lista_triangulos[i]):
+			triangulo_selecionado = i;
+			queue_redraw();
 			return i;
 	return -1;
 
@@ -54,7 +57,7 @@ func _draw():
 	for novo_ponto in pontos_novo_triangulo:
 		draw_line(novo_ponto.coordenadas, novo_ponto.coordenadas+Vector2(5,0), Color.WHITE, 5);
 
-	# Desenha todos os triângulos
+	# Desenha todos os triângulos e suas scanlines
 	for triangulo in lista_triangulos:
 		for ponto_scanline in triangulo.scanlines:
 			draw_line(ponto_scanline.coordenadas, ponto_scanline.coordenadas+Vector2(1,0), ponto_scanline.cor, 1);
@@ -62,6 +65,12 @@ func _draw():
 		for i in range(pontos.size()):
 			var f: int = (i+1) % pontos.size();
 			draw_line(pontos[i].coordenadas, pontos[f].coordenadas, triangulo.cor_arestas, 1);
+	
+	# Desenha bouding box do triangulo selecionado
+	if triangulo_selecionado != -1:
+		var triangulo: Triangulo = lista_triangulos[triangulo_selecionado];
+		for ponto in triangulo.pontos:
+			draw_line(ponto.coordenadas, ponto.coordenadas+Vector2(10,0), ponto.cor, 10);
 
 # Checa se dado ponto está contido na área de um dado triângulo
 func is_dentro_triangulo(P: Vector2, triangulo: Triangulo) -> bool:

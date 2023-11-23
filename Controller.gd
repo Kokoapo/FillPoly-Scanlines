@@ -39,6 +39,7 @@ var estado: bool = false:
 			canvas.queue_redraw();
 		else:
 			triangulo_selecionado = -1;
+			canvas.triangulo_selecionado = -1;
 
 # Controle dos inputs do mouse e das ações do canvas
 func _input(event):
