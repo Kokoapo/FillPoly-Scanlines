@@ -10,4 +10,7 @@ bash ./FillPolyCG.sh
 Para testar o projeto em si faça os seguintes passos: 
 - Baixe a Godot Engine na versão 4.2, em https://godotengine.org
 - Clone o repositório
-- Inicialize a Godot Engine, 
+- Inicialize a Godot Engine
+- Clique no botão "Importar"
+- Selecione "project.godot" dentro da pasta do repositório clonado
+- Inicie o projeto na Godot
