@@ -57,12 +57,15 @@ func _on_sair_pressed():
 # Atualizar cores do triângulo selecionado
 func _on_vertice_1_color_changed(color):
 	canvas.lista_triangulos[triangulo_selecionado].pontos[0].cor = color;
+	canvas.queue_redraw();
 
 func _on_vertice_2_color_changed(color):
 	canvas.lista_triangulos[triangulo_selecionado].pontos[1].cor = color;
+	canvas.queue_redraw();
 
 func _on_vertice_3_color_changed(color):
 	canvas.lista_triangulos[triangulo_selecionado].pontos[2].cor = color;
+	canvas.queue_redraw();
 
 func _on_arestas_color_changed(color):
 	canvas.lista_triangulos[triangulo_selecionado].cor_arestas = color;
@@ -75,7 +78,8 @@ func _on_pintar_pressed():
 # Remover triangulo_selecionado da lista do canvas
 func _on_remover_pressed():
 	canvas.lista_triangulos.remove_at(triangulo_selecionado);
-	canvas.scanlines.clear();
+	triangulo_selecionado = -1;
+	canvas.triangulo_selecionado = -1;
 	canvas.queue_redraw(); # Atualizar Canvas
 
 # Switch para troca de estados
